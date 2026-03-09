@@ -97,21 +97,61 @@ export default function DailyView({ selected }: { selected: Date }) {
   }
 
   return (
-    <div className="card">
-      <h2>当日成绩: {iso}</h2>
-      <div className="daily-view-form">
-        <label>数学</label>
-        <input type="number" value={math} onChange={e => setMath(e.target.value === '' ? '' : Number(e.target.value))} placeholder="0-100" />
-        <label>阅读</label>
-        <input type="number" value={reading} onChange={e => setReading(e.target.value === '' ? '' : Number(e.target.value))} placeholder="0-100" />
-        <label>拼写</label>
-        <input type="number" value={spelling} onChange={e => setSpelling(e.target.value === '' ? '' : Number(e.target.value))} placeholder="0-100" />
-        <button onClick={save} disabled={saving}>{saving ? '保存中...' : '保存今日记录'}</button>
+    <>
+      <div className="card">
+        <h2 className="m-0 text-xl font-bold text-[#2d2d5f]">当日成绩填写: {iso}</h2>
+        <div className="mt-4">
+          <div className="grid grid-cols-3 gap-3">
+            <div className="min-w-0 flex flex-col">
+              <div className="text-[13px] font-semibold text-[#2d2d5f] mb-1 text-center">数学</div>
+              <input
+                className="w-full h-11 px-3 rounded-xl border-2 border-[color:#7C3AED4D] bg-[color:#C39BFF1A] text-[#2d2d5f] text-[14px] outline-none focus:border-[color:#7C3AED99]"
+                type="number"
+                value={math}
+                onChange={e => setMath(e.target.value === '' ? '' : Number(e.target.value))}
+                placeholder="0-100"
+              />
+            </div>
+            <div className="min-w-0 flex flex-col">
+              <div className="text-[13px] font-semibold text-[#2d2d5f] mb-1 text-center">阅读</div>
+              <input
+                className="w-full h-11 px-3 rounded-xl border-2 border-[color:#7C3AED4D] bg-[color:#C39BFF1A] text-[#2d2d5f] text-[14px] outline-none focus:border-[color:#7C3AED99]"
+                type="number"
+                value={reading}
+                onChange={e => setReading(e.target.value === '' ? '' : Number(e.target.value))}
+                placeholder="0-100"
+              />
+            </div>
+            <div className="min-w-0 flex flex-col">
+              <div className="text-[13px] font-semibold text-[#2d2d5f] mb-1 text-center">拼写</div>
+              <input
+                className="w-full h-11 px-3 rounded-xl border-2 border-[color:#7C3AED4D] bg-[color:#C39BFF1A] text-[#2d2d5f] text-[14px] outline-none focus:border-[color:#7C3AED99]"
+                type="number"
+                value={spelling}
+                onChange={e => setSpelling(e.target.value === '' ? '' : Number(e.target.value))}
+                placeholder="0-100"
+              />
+            </div>
+          </div>
+
+          <div className="flex justify-center mt-4">
+            <button
+              className="px-10 h-11 rounded-xl font-bold text-[14px] text-white bg-gradient-to-b from-[#7C3AED] to-[#5B21B6] border border-[color:#7C3AED66] shadow-sm disabled:opacity-60 disabled:cursor-not-allowed"
+              onClick={save}
+              disabled={saving}
+            >
+              {saving ? '保存中...' : '保存今日记录'}
+            </button>
+          </div>
+        </div>
+        <MedalPopup emoji={medalEmoji} />
       </div>
-      <div style={{ height: 180, marginTop: 16 }}>
-        <Bar data={data} options={options} />
+      <div className="card">
+        <h2 className="m-0 text-xl font-bold text-[#2d2d5f]">柱状统计: {iso}</h2>
+        <div style={{ height: 180 }}>
+          <Bar data={data} options={options} />
+        </div>
       </div>
-      <MedalPopup emoji={medalEmoji} />
-    </div>
+    </>
   )
 }

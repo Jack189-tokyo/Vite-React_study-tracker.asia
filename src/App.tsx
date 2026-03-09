@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './App.css';
+// tailwind-only styling
 import { useAuth } from './AuthContext';
 import AuthForm from './AuthForm';
 import Header from './Header';
@@ -51,18 +51,23 @@ function App() {
   }
 
   if (!session) {
-    return <AuthForm />;
+    return (
+      <div className="relative z-10">
+        <DynamicBackground />
+        <AuthForm />
+      </div>
+    );
   }
 
   const selectedISO = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
 
   return (
-    <div className="app-container">
+    <div className="relative z-10 max-w-[500px] min-h-screen mx-auto p-4 box-border flex flex-col">
       <DynamicBackground />
       <Header onProfileClick={() => setProfileOpen(true)} />
-      <main className="main-content">
+      <main className="flex flex-col gap-6 flex-grow overflow-visible">
         <CalendarView selected={selectedDate} onDateSelect={setSelectedDate} />
-        <div>
+        <div className="flex flex-col gap-6">
           <DailyView selected={selectedDate} />
           <WrongBook selectedISO={selectedISO} onJumpDate={(iso) => {
             const [y, m, d] = iso.split('-').map(n => parseInt(n, 10));

@@ -39,10 +39,21 @@ export default function WrongBook({ selectedISO, onJumpDate }: { selectedISO: st
 
   return (
     <div className="card">
-      <h3>错题笔记本</h3>
-      <div style={{ display: 'flex', gap: 10, margin: '15px 0' }}>
-        <input type="text" value={input} onChange={e => setInput(e.target.value)} placeholder="输入错题内容或知识点..." style={{ flex: 1 }} />
-        <button onClick={addWrong} style={{ width: 80 }}>添加</button>
+      <h3 className="m-0 text-xl font-bold text-[#2d2d5f]">错题笔记本</h3>
+      <div className="flex gap-3 my-4">
+        <input
+          className="flex-1 h-11 px-3 rounded-xl border-2 border-[color:#7C3AED4D] bg-[color:#C39BFF1A] text-[#2d2d5f] text-[14px] outline-none focus:border-[color:#7C3AED99]"
+          type="text"
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          placeholder="输入错题内容或知识点..."
+        />
+        <button
+          className="shrink-0 h-11 px-6 rounded-xl font-bold text-[14px] text-white bg-gradient-to-b from-[#7C3AED] to-[#5B21B6] border border-[color:#7C3AED66] shadow-sm"
+          onClick={addWrong}
+        >
+          添加
+        </button>
       </div>
       <ul className="wrong-book-list">
         {list.length === 0 ? (
@@ -60,7 +71,16 @@ export default function WrongBook({ selectedISO, onJumpDate }: { selectedISO: st
       <h4 style={{ color: '#8a87b8', fontSize: 13 }}>历史错题库 (点击日期查看)</h4>
       <div style={{ display: 'flex', gap: 10, padding: '10px 5px', overflowX: 'auto' }}>
         {historyDates.length ? historyDates.map(d => (
-          <button key={d} className="page-btn" onClick={() => onJumpDate(d)}>{d}</button>
+          <button
+            key={d}
+            className="page-btn min-w-[84px] px-3 py-2 leading-tight"
+            onClick={() => onJumpDate(d)}
+          >
+            <span className="flex flex-col items-center">
+              <span className="text-[13px] font-extrabold text-[#5B21B6]">{d.slice(0, 4)}</span>
+              <span className="text-[12px] font-bold text-[#7C3AED]">{d.slice(5)}</span>
+            </span>
+          </button>
         )) : '暂无历史'}
       </div>
     </div>

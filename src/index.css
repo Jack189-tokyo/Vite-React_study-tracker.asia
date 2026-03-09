@@ -1,77 +1,53 @@
-:root {
-  font-family: "Segoe UI", system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import "tailwindcss";
+@reference "tailwindcss";
 
-  color-scheme: light dark;
-  color: #213547;
-  background-color: #f0f2f5;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: none;
-}
-a:hover {
-  color: #747bff;
+@layer base {
+  html {
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+      "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", "Noto Sans SC", sans-serif;
+  }
+  body {
+    color: #2d2d5f;
+  }
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
 }
 
-body {
-  margin: 0;
-  min-height: 100vh;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-  margin: 0;
-}
-
-h2 {
-  font-size: 1.8em;
-  border-bottom: 1px solid #e0e0e0;
-  padding-bottom: 0.5rem;
-  margin-top: 0;
-}
-
-input,
-select {
-  width: 100%;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-  box-sizing: border-box;
-  background-color: #fff;
-  color: #333;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1rem;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #646cff;
-  color: #fff;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  background-color: #535bf2;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+@layer components {
+  .card {
+    @apply bg-[color:#FFFFFFD9] backdrop-blur rounded-3xl p-5 shadow-xl border-2 border-[color:#7C3AED4D];
+  }
+  .app-container {
+    @apply min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-[#ede9fe] via-[#fdf2ff] to-[#eef2ff];
+  }
+  .calendar-cell {
+    @apply relative overflow-hidden;
+  }
+  .calendar-cell::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      radial-gradient(circle at 28% 22%, rgba(195, 155, 255, 0.26), transparent 58%),
+      radial-gradient(circle at 74% 80%, rgba(124, 58, 237, 0.12), transparent 62%);
+    opacity: 0.75;
+  }
+  .page-btn {
+    @apply bg-[color:#C39BFF1A] border border-[color:#7C3AED4D] px-5 py-2 rounded-xl text-[#7C3AED] font-bold cursor-pointer min-w-[80px];
+  }
+  .page-btn:disabled {
+    @apply text-gray-300 bg-gray-100 border-gray-200 cursor-not-allowed;
+  }
+  .text-btn {
+    @apply bg-transparent border-0 underline text-[#8a87b8] text-sm cursor-pointer;
+  }
+  .wrong-book-list { @apply list-none p-0; }
+  .wrong-book-item { @apply bg-white rounded-2xl p-4 mb-2.5 flex justify-between items-center border-2 border-[color:#7C3AED4D]; }
+  .delete-btn { @apply bg-[#fff0f0] text-[#ff4d4f] border border-[#ffccc7] px-3 py-1.5 rounded-lg text-xs cursor-pointer; }
+  .pagination-controls { @apply flex justify-center items-center w-full gap-4 mt-6; }
 }
