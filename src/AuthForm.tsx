@@ -7,6 +7,7 @@ export default function AuthForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [otpEmail, setOtpEmail] = useState('')
+  const redirectTo = 'https://react.study-tracker.asia/'
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -19,7 +20,11 @@ export default function AuthForm() {
   const handleSignup = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
-    const { error } = await supabase.auth.signUp({ email, password })
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: { emailRedirectTo: redirectTo }
+    })
     if (error) alert(error.message)
     else alert('注册成功！请登录。')
     setLoading(false)
@@ -28,7 +33,10 @@ export default function AuthForm() {
   const handleSendOtp = async () => {
     if (!otpEmail) { alert('请输入邮箱'); return }
     setLoading(true)
-    const { error } = await supabase.auth.signInWithOtp({ email: otpEmail })
+    const { error } = await supabase.auth.signInWithOtp({
+      email: otpEmail,
+      options: { emailRedirectTo: redirectTo }
+    })
     if (error) alert(error.message)
     else alert('登录链接已发送，请查收邮件')
     setLoading(false)
