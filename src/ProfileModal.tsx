@@ -2,17 +2,17 @@ import { useRef, useState } from 'react'
 import { useAuth } from './AuthContext'
 import { supabase } from './supabaseClient'
 
-export default function ProfileModal({ open, onClose }: { open: boolean; onClose: () => void }) {
-  const { user } = useAuth()
+export default function ProfileModal() {
+  const { user, profileOpen, setProfileOpen, recoveryMode } = useAuth()
   const [nickname, setNickname] = useState(user?.user_metadata?.full_name || '')
   const [file, setFile] = useState<File | null>(null)
   const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [oldPwd, setOldPwd] = useState('')
   const [newPwd, setNewPwd] = useState('')
   const [confirmPwd, setConfirmPwd] = useState('')
-  const recoveryMode = !!(window.location.hash && window.location.hash.includes('type=magiclink'))
 
-  if (!open) return null
+  if (!profileOpen) return null
+  const onClose = () => setProfileOpen(false)
   const displayName = user?.user_metadata?.full_name || user?.email?.split('@')[0] || 'U'
   const defaultAvatar = `https://ui-avatars.com/api/?name=${displayName}&background=7b68ee&color=fff&size=128&length=1&bold=true`
   const avatarUrl = file ? URL.createObjectURL(file) : (user?.user_metadata?.avatar_url || defaultAvatar)

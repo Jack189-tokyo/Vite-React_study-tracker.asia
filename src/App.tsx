@@ -13,9 +13,8 @@ import { supabase } from './supabaseClient';
 import { useEffect } from 'react';
 
 function App() {
-  const { session, loading } = useAuth();
+  const { session, loading, setProfileOpen } = useAuth();
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [profileOpen, setProfileOpen] = useState(false);
 
   useEffect(() => {
     const run = async () => {
@@ -76,7 +75,7 @@ function App() {
           <HonorWall />
         </div>
       </main>
-      <ProfileModal open={profileOpen} onClose={() => setProfileOpen(false)} />
+      <ProfileModal />
     </div>
   );
 }
