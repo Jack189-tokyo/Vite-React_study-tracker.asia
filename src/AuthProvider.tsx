@@ -19,13 +19,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
+      console.log('Auth event:', event, session?.user?.email)
       setSession(session)
       setUser(session?.user ?? null)
       setLoading(false)
 
-      if (event === 'PASSWORD_RECOVERY') {
+      const isRecovery = window.location.hash && window.location.hash.includes('type=recovery')
+      if (event === 'PASSWORD_RECOVERY' || isRecovery) {
         setRecoveryMode(true)
         setProfileOpen(true)
+      } else if (event === 'SIGNED_IN') {
+        // 普通登录（如魔术链接），不进入重置模式，确保弹窗关闭
+        setRecoveryMode(false)
       }
     })
     

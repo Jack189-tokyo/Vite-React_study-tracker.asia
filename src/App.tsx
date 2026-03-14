@@ -46,16 +46,7 @@ function App() {
   }, [session]);
 
   if (loading) {
-    return <div>加载中...</div>; // 或者一个漂亮的加载动画
-  }
-
-  if (!session) {
-    return (
-      <div className="relative z-10">
-        <DynamicBackground />
-        <AuthForm />
-      </div>
-    );
+    return <div className="min-h-screen flex items-center justify-center text-[#8a87b8]">加载中...</div>;
   }
 
   const selectedISO = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
@@ -63,18 +54,26 @@ function App() {
   return (
     <div className="relative z-10 max-w-[500px] min-h-screen mx-auto p-4 box-border flex flex-col">
       <DynamicBackground />
-      <Header onProfileClick={() => setProfileOpen(true)} />
-      <main className="flex flex-col gap-6 flex-grow overflow-visible">
-        <CalendarView selected={selectedDate} onDateSelect={setSelectedDate} />
-        <div className="flex flex-col gap-6">
-          <DailyView selected={selectedDate} />
-          <WrongBook selectedISO={selectedISO} onJumpDate={(iso) => {
-            const [y, m, d] = iso.split('-').map(n => parseInt(n, 10));
-            setSelectedDate(new Date(y, m - 1, d));
-          }} />
-          <HonorWall />
-        </div>
-      </main>
+      
+      {!session ? (
+        <AuthForm />
+      ) : (
+        <>
+          <Header onProfileClick={() => setProfileOpen(true)} />
+          <main className="flex flex-col gap-6 flex-grow overflow-visible">
+            <CalendarView selected={selectedDate} onDateSelect={setSelectedDate} />
+            <div className="flex flex-col gap-6">
+              <DailyView selected={selectedDate} />
+              <WrongBook selectedISO={selectedISO} onJumpDate={(iso) => {
+                const [y, m, d] = iso.split('-').map(n => parseInt(n, 10));
+                setSelectedDate(new Date(y, m - 1, d));
+              }} />
+              <HonorWall />
+            </div>
+          </main>
+        </>
+      )}
+
       <ProfileModal />
     </div>
   );

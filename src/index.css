@@ -8,6 +8,8 @@
   }
   body {
     color: #2d2d5f;
+    background: linear-gradient(to bottom right, #ede9fe, #fdf2ff, #eef2ff);
+    min-height: 100vh;
   }
   button,
   input,
@@ -22,7 +24,7 @@
     @apply bg-[color:#FFFFFFD9] backdrop-blur rounded-3xl p-5 shadow-xl border-2 border-[color:#7C3AED4D];
   }
   .app-container {
-    @apply min-h-screen flex items-center justify-center px-4 bg-gradient-to-br from-[#ede9fe] via-[#fdf2ff] to-[#eef2ff];
+    @apply min-h-screen flex items-center justify-center px-4;
   }
   .calendar-cell {
     @apply relative overflow-hidden;

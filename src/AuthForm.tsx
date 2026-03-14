@@ -7,7 +7,7 @@ export default function AuthForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [otpEmail, setOtpEmail] = useState('')
-  const redirectTo = 'https://react.study-tracker.asia/'
+  const redirectTo = import.meta.env.VITE_AUTH_REDIRECT_URL || 'https://react.study-tracker.asia/'
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -39,6 +39,18 @@ export default function AuthForm() {
     })
     if (error) alert(error.message)
     else alert('登录链接已发送，请查收邮件')
+    setLoading(false)
+  }
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!email) { alert('请输入电子邮箱'); return }
+    setLoading(true)
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: redirectTo
+    })
+    if (error) alert(error.message)
+    else alert('重置密码链接已发送，请查收邮件')
     setLoading(false)
   }
 
@@ -88,7 +100,7 @@ export default function AuthForm() {
             >
               {loading ? '登录中...' : '立即登录'}
             </button>
-            <button className="text-btn" onClick={(e) => { e.preventDefault(); setTab('otp'); setOtpEmail(email) }} style={{ width: '100%', marginTop: 10 }}>忘记密码？</button>
+            <button className="text-btn" onClick={handleForgotPassword} style={{ width: '100%', marginTop: 10 }}>忘记密码？</button>
           </form>
         )}
         {tab === 'reg' && (
