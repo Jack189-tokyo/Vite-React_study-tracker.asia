@@ -47,41 +47,47 @@ export default function CalendarView({ selected, onDateSelect }: { selected: Dat
   }
 
   return (
-    <div className="card">
-      <div className="flex justify-between items-center mb-4 gap-3">
-        <div className="flex items-center gap-3 flex-nowrap min-w-0">
-          <button className="page-btn whitespace-nowrap shrink-0 min-w-[64px] px-4"
-            onClick={() => { const m2 = month - 1; if (m2 < 0) { setMonth(11); setYear(y => y - 1) } else setMonth(m2) }}>上一月</button>
-          <h2 className="m-0 text-xl font-bold whitespace-nowrap shrink-0">{year}年{month + 1}月</h2>
-          <button className="page-btn whitespace-nowrap shrink-0 min-w-[64px] px-4"
-            onClick={() => { const m2 = month + 1; if (m2 > 11) { setMonth(0); setYear(y => y + 1) } else setMonth(m2) }}>下一月</button>
+    <div className="card p-4 sm:p-5">
+      <div className="flex justify-between items-center mb-4 gap-2 sm:gap-3 px-1 sm:px-0">
+        <div className="flex items-center gap-2 sm:gap-3 flex-nowrap min-w-0">
+          <button className="page-btn flex items-center justify-center min-w-[36px] sm:min-w-[64px] h-9 sm:h-10 px-0 sm:px-4"
+            onClick={() => { const m2 = month - 1; if (m2 < 0) { setMonth(11); setYear(y => y - 1) } else setMonth(m2) }}>
+            <span className="sm:hidden text-sm">{"<"}</span>
+            <span className="hidden sm:inline">上一月</span>
+          </button>
+          <h2 className="m-0 text-base sm:text-xl font-bold whitespace-nowrap shrink-0">{year}年{month + 1}月</h2>
+          <button className="page-btn flex items-center justify-center min-w-[36px] sm:min-w-[64px] h-9 sm:h-10 px-0 sm:px-4"
+            onClick={() => { const m2 = month + 1; if (m2 > 11) { setMonth(0); setYear(y => y + 1) } else setMonth(m2) }}>
+            <span className="sm:hidden text-sm">{">"}</span>
+            <span className="hidden sm:inline">下一月</span>
+          </button>
         </div>
-        <div className="relative w-[120px] shrink-0">
-          <div className="bg-white border-2 border-[color:#7C3AED4D] h-10 px-3 rounded-xl text-[13px] font-semibold text-[#2d2d5f] cursor-pointer flex justify-between items-center gap-2"
+        <div className="relative w-[110px] sm:w-[140px] shrink-0">
+          <div className="bg-white border-2 border-[color:#7C3AED4D] h-9 sm:h-10 px-3 rounded-xl text-[12px] sm:text-[13px] font-semibold text-[#2d2d5f] cursor-pointer flex justify-between items-center gap-1.5 sm:gap-2"
                onClick={() => setOpen(o => !o)}>
             <span className="min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
-              {subject === 'math' ? '数学热力图' : subject === 'reading' ? '阅读热力图' : '拼写热力图'}
+              {subject === 'math' ? '数学' : subject === 'reading' ? '阅读' : '拼写'}
             </span>
-            <span className="text-[10px] shrink-0">▼</span>
+            <span className="text-[8px] sm:text-[10px] shrink-0 opacity-60">▼</span>
           </div>
           {open && (
-            <div className="absolute top-[calc(100%+8px)] left-0 right-0 bg-white rounded-2xl shadow-xl z-50 overflow-hidden border-2 border-[color:#7C3AED4D] animate-[fadeInMenu_0.25s_ease-out]">
-              <div className={`py-3 text-center text-[13px] text-[#2d2d5f] cursor-pointer ${subject === 'math' ? 'bg-[color:#C39BFF1A] text-[#7C3AED] font-bold' : ''}`}
+            <div className="absolute top-[calc(100%+8px)] right-0 w-[120px] sm:w-full bg-white rounded-2xl shadow-xl z-50 overflow-hidden border-2 border-[color:#7C3AED4D] animate-[fadeInMenu_0.25s_ease-out]">
+              <div className={`py-3 text-center text-[12px] sm:text-[13px] text-[#2d2d5f] cursor-pointer ${subject === 'math' ? 'bg-[color:#C39BFF1A] text-[#7C3AED] font-bold' : ''}`}
                    onClick={() => { setSubject('math'); setOpen(false) }}>数学热力图</div>
-              <div className={`py-3 text-center text-[13px] text-[#2d2d5f] cursor-pointer ${subject === 'reading' ? 'bg-[color:#C39BFF1A] text-[#7C3AED] font-bold' : ''}`}
+              <div className={`py-3 text-center text-[12px] sm:text-[13px] text-[#2d2d5f] cursor-pointer ${subject === 'reading' ? 'bg-[color:#C39BFF1A] text-[#7C3AED] font-bold' : ''}`}
                    onClick={() => { setSubject('reading'); setOpen(false) }}>阅读热力图</div>
-              <div className={`py-3 text-center text-[13px] text-[#2d2d5f] cursor-pointer ${subject === 'spelling' ? 'bg-[color:#C39BFF1A] text-[#7C3AED] font-bold' : ''}`}
+              <div className={`py-3 text-center text-[12px] sm:text-[13px] text-[#2d2d5f] cursor-pointer ${subject === 'spelling' ? 'bg-[color:#C39BFF1A] text-[#7C3AED] font-bold' : ''}`}
                    onClick={() => { setSubject('spelling'); setOpen(false) }}>拼写热力图</div>
             </div>
           )}
         </div>
       </div>
-      <div className="grid grid-cols-7 gap-2">
+      <div className="grid grid-cols-7 gap-1 sm:gap-2">
         {['一', '二', '三', '四', '五', '六', '日'].map(w => (
-          <div key={w} className="calendar-weekday">{w}</div>
+          <div key={w} className="calendar-weekday text-[12px] sm:text-sm">{w}</div>
         ))}
         {matrix.map((date, i) => {
-          if (!date) return <div key={`blank-${i}`} className="calendar-cell h-14 rounded-xl border border-[color:#7C3AED33] bg-[color:#C39BFF1A] text-[#aaa] flex items-center justify-center" />
+          if (!date) return <div key={`blank-${i}`} className="calendar-cell aspect-square rounded-lg sm:rounded-xl border border-[color:#7C3AED33] bg-[color:#C39BFF1A] flex items-center justify-center" />
           const iso = formatISO(date)
           const data = hist[iso]
           const v = data?.[subject]
@@ -97,7 +103,7 @@ export default function CalendarView({ selected, onDateSelect }: { selected: Dat
           return (
             <div
               key={iso}
-              className={`calendar-cell h-14 rounded-xl cursor-pointer flex items-center justify-center border ${v !== undefined ? 'border-[#84cc16]' : 'border-[color:#7C3AED33]'} ${isSelected ? 'font-bold' : ''}`}
+              className={`calendar-cell aspect-square rounded-lg sm:rounded-xl cursor-pointer flex items-center justify-center border text-sm sm:text-base ${v !== undefined ? 'border-[#84cc16]' : 'border-[color:#7C3AED33]'} ${isSelected ? 'font-bold' : ''}`}
               style={style}
               onClick={() => onDateSelect(date)}
             >

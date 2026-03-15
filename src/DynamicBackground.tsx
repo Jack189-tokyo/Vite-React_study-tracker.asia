@@ -57,6 +57,9 @@ export default function DynamicBackground() {
 
     let animationFrameId: number;
     const animate = () => {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+
       elements.forEach(p => {
         p.x += p.vx;
         p.y += p.vy;
@@ -76,11 +79,14 @@ export default function DynamicBackground() {
             p.y += uy * force * 8;
           }
         }
-        if (p.x < -p.size || p.x > window.innerWidth || p.y < -p.size || p.y > window.innerHeight) {
-          p.x = Math.random() * window.innerWidth;
-          p.y = -p.size;
-        }
-        p.el.style.transform = `translate(${p.x}px, ${p.y}px)`;
+
+        // 边界检查：如果超出屏幕，从另一侧出现（形成循环）
+        if (p.x < -p.size * 2) p.x = width + p.size;
+        if (p.x > width + p.size * 2) p.x = -p.size;
+        if (p.y < -p.size * 2) p.y = height + p.size;
+        if (p.y > height + p.size * 2) p.y = -p.size;
+
+        p.el.style.transform = `translate3d(${p.x}px, ${p.y}px, 0)`;
       });
       animationFrameId = requestAnimationFrame(animate);
     };
