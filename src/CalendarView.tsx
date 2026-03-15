@@ -50,25 +50,25 @@ export default function CalendarView({ selected, onDateSelect }: { selected: Dat
     <div className="card p-4 sm:p-5">
       <div className="flex justify-between items-center mb-4 gap-2 sm:gap-3 px-1 sm:px-0">
         <div className="flex items-center gap-2 sm:gap-3 flex-nowrap min-w-0">
-          <button className="page-btn flex items-center justify-center min-w-[36px] sm:min-w-[64px] h-9 sm:h-10 px-0 sm:px-4"
+          <button className="page-btn flex items-center justify-center min-w-[36px] h-9 sm:h-10 px-0"
             onClick={() => { const m2 = month - 1; if (m2 < 0) { setMonth(11); setYear(y => y - 1) } else setMonth(m2) }}>
-            <span className="sm:hidden text-sm">{"<"}</span>
-            <span className="hidden sm:inline">上一月</span>
+            <span className="text-sm sm:text-base">{"<"}</span>
           </button>
           <h2 className="m-0 text-base sm:text-xl font-bold whitespace-nowrap shrink-0">{year}年{month + 1}月</h2>
-          <button className="page-btn flex items-center justify-center min-w-[36px] sm:min-w-[64px] h-9 sm:h-10 px-0 sm:px-4"
+          <button className="page-btn flex items-center justify-center min-w-[36px] h-9 sm:h-10 px-0"
             onClick={() => { const m2 = month + 1; if (m2 > 11) { setMonth(0); setYear(y => y + 1) } else setMonth(m2) }}>
-            <span className="sm:hidden text-sm">{">"}</span>
-            <span className="hidden sm:inline">下一月</span>
+            <span className="text-sm sm:text-base">{">"}</span>
           </button>
         </div>
         <div className="relative w-[110px] sm:w-[140px] shrink-0">
-          <div className="bg-white border-2 border-[color:#7C3AED4D] h-9 sm:h-10 px-3 rounded-xl text-[12px] sm:text-[13px] font-semibold text-[#2d2d5f] cursor-pointer flex justify-between items-center gap-1.5 sm:gap-2"
+          <div className="bg-white border-2 border-[color:#7C3AED4D] h-9 sm:h-10 px-2 sm:px-3 rounded-xl text-[12px] sm:text-[13px] font-semibold text-[#2d2d5f] cursor-pointer flex items-center justify-center gap-1 sm:gap-2"
                onClick={() => setOpen(o => !o)}>
-            <span className="min-w-0 overflow-hidden text-ellipsis whitespace-nowrap">
-              {subject === 'math' ? '数学' : subject === 'reading' ? '阅读' : '拼写'}
-            </span>
-            <span className="text-[8px] sm:text-[10px] shrink-0 opacity-60">▼</span>
+            <div className="flex-1 flex justify-center items-center gap-1 min-w-0">
+              <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                {subject === 'math' ? '数学' : subject === 'reading' ? '阅读' : '拼写'}
+              </span>
+              <span className="text-[8px] sm:text-[10px] shrink-0 opacity-60">▼</span>
+            </div>
           </div>
           {open && (
             <div className="absolute top-[calc(100%+8px)] right-0 w-[120px] sm:w-full bg-white rounded-2xl shadow-xl z-50 overflow-hidden border-2 border-[color:#7C3AED4D] animate-[fadeInMenu_0.25s_ease-out]">
