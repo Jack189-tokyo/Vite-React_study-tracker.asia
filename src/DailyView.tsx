@@ -105,7 +105,7 @@ export default function DailyView({ selected }: { selected: Date }) {
             <div className="min-w-0 flex flex-col">
               <div className="text-[13px] font-semibold text-[#2d2d5f] mb-1 text-center">数学</div>
               <input
-                className="w-full h-11 px-3 rounded-xl border-2 border-[color:#7C3AED4D] bg-[color:#C39BFF1A] text-[#2d2d5f] text-[14px] outline-none focus:border-[color:#7C3AED99]"
+                className="w-full h-11 px-3 rounded-xl border-2 border-[color:#7C3AED4D] bg-[color:#C39BFF1A] text-[#2d2d5f] text-[14px] text-center outline-none focus:border-[color:#7C3AED99]"
                 type="number"
                 value={math}
                 onChange={e => setMath(e.target.value === '' ? '' : Number(e.target.value))}
@@ -115,7 +115,7 @@ export default function DailyView({ selected }: { selected: Date }) {
             <div className="min-w-0 flex flex-col">
               <div className="text-[13px] font-semibold text-[#2d2d5f] mb-1 text-center">阅读</div>
               <input
-                className="w-full h-11 px-3 rounded-xl border-2 border-[color:#7C3AED4D] bg-[color:#C39BFF1A] text-[#2d2d5f] text-[14px] outline-none focus:border-[color:#7C3AED99]"
+                className="w-full h-11 px-3 rounded-xl border-2 border-[color:#7C3AED4D] bg-[color:#C39BFF1A] text-[#2d2d5f] text-[14px] text-center outline-none focus:border-[color:#7C3AED99]"
                 type="number"
                 value={reading}
                 onChange={e => setReading(e.target.value === '' ? '' : Number(e.target.value))}
@@ -125,7 +125,7 @@ export default function DailyView({ selected }: { selected: Date }) {
             <div className="min-w-0 flex flex-col">
               <div className="text-[13px] font-semibold text-[#2d2d5f] mb-1 text-center">拼写</div>
               <input
-                className="w-full h-11 px-3 rounded-xl border-2 border-[color:#7C3AED4D] bg-[color:#C39BFF1A] text-[#2d2d5f] text-[14px] outline-none focus:border-[color:#7C3AED99]"
+                className="w-full h-11 px-3 rounded-xl border-2 border-[color:#7C3AED4D] bg-[color:#C39BFF1A] text-[#2d2d5f] text-[14px] text-center outline-none focus:border-[color:#7C3AED99]"
                 type="number"
                 value={spelling}
                 onChange={e => setSpelling(e.target.value === '' ? '' : Number(e.target.value))}
