@@ -7,7 +7,7 @@ export default function AuthForm() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [otpEmail, setOtpEmail] = useState('')
-  const redirectTo = import.meta.env.VITE_AUTH_REDIRECT_URL || 'https://react.study-tracker.asia/'
+  const redirectTo = import.meta.env.VITE_AUTH_REDIRECT_URL || window.location.origin
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
