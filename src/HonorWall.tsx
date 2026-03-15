@@ -28,18 +28,29 @@ export default function HonorWall() {
         <h3 className="m-0 text-xl font-bold text-[#2d2d5f]">勋章荣誉墙</h3>
       </div>
 
-      <div className="rounded-2xl border border-[color:#7C3AED4D] bg-[color:#C39BFF14] px-4 py-3 flex items-center justify-center gap-10">
-        <div className="flex items-center gap-2 text-[#2d2d5f] font-semibold">
-          <span>🥇</span>
-          <span>金牌: {stats.gold}</span>
+      <div className="rounded-2xl border border-[color:#7C3AED4D] bg-[color:#C39BFF14] px-2 py-4 flex items-center justify-around">
+        <div className="flex flex-col items-center gap-1 text-[#2d2d5f]">
+          <div className="flex items-center gap-1 font-bold text-[13px] whitespace-nowrap">
+            <span>🥇</span>
+            <span>金牌</span>
+          </div>
+          <div className="text-xl font-black text-[#7C3AED] leading-none mt-1">{stats.gold}</div>
         </div>
-        <div className="flex items-center gap-2 text-[#2d2d5f] font-semibold">
-          <span>🥈</span>
-          <span>银牌: {stats.silver}</span>
+        <div className="w-[1px] h-8 bg-[color:#7C3AED33]"></div>
+        <div className="flex flex-col items-center gap-1 text-[#2d2d5f]">
+          <div className="flex items-center gap-1 font-bold text-[13px] whitespace-nowrap">
+            <span>🥈</span>
+            <span>银牌</span>
+          </div>
+          <div className="text-xl font-black text-[#7C3AED] leading-none mt-1">{stats.silver}</div>
         </div>
-        <div className="flex items-center gap-2 text-[#2d2d5f] font-semibold">
-          <span>🥉</span>
-          <span>铜牌: {stats.bronze}</span>
+        <div className="w-[1px] h-8 bg-[color:#7C3AED33]"></div>
+        <div className="flex flex-col items-center gap-1 text-[#2d2d5f]">
+          <div className="flex items-center gap-1 font-bold text-[13px] whitespace-nowrap">
+            <span>🥉</span>
+            <span>铜牌</span>
+          </div>
+          <div className="text-xl font-black text-[#7C3AED] leading-none mt-1">{stats.bronze}</div>
         </div>
       </div>
 
