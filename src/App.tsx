@@ -9,6 +9,7 @@ import DailyView from './DailyView';
 import WrongBook from './WrongBook';
 import HonorWall from './HonorWall';
 import ProfileModal from './ProfileModal';
+import ResetPasswordModal from './ResetPasswordModal';
 import { supabase } from './supabaseClient';
 import { useEffect } from 'react';
 
@@ -75,6 +76,7 @@ function App() {
       )}
 
       <ProfileModal />
+      <ResetPasswordModal />
     </div>
   );
 }

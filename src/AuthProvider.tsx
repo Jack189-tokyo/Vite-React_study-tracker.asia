@@ -10,12 +10,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
   const [recoveryMode, setRecoveryMode] = useState(false)
   const [profileOpen, setProfileOpen] = useState(false)
+  const [resetPasswordOpen, setResetPasswordOpen] = useState(false)
 
   useEffect(() => {
-    // 初始检测魔术链接
+    // 初始检测恢复链接
     if (window.location.hash && window.location.hash.includes('type=recovery')) {
       setRecoveryMode(true)
-      setProfileOpen(true)
+      setResetPasswordOpen(true)
     }
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
@@ -27,10 +28,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       const isRecovery = window.location.hash && window.location.hash.includes('type=recovery')
       if (event === 'PASSWORD_RECOVERY' || isRecovery) {
         setRecoveryMode(true)
-        setProfileOpen(true)
+        setResetPasswordOpen(true)
+        setProfileOpen(false) // 确保不打开个人资料弹窗
       } else if (event === 'SIGNED_IN') {
-        // 普通登录（如魔术链接），不进入重置模式，确保弹窗关闭
-        setRecoveryMode(false)
+        // 如果不是恢复模式，确保重置弹窗是关闭的
+        if (!isRecovery && !recoveryMode) {
+          setResetPasswordOpen(false)
+        }
       }
     })
     
@@ -41,8 +45,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     })
     
     return () => subscription.unsubscribe()
-  }, [])
+  }, [recoveryMode])
 
-  const value = { session, user, loading, recoveryMode, profileOpen, setProfileOpen }
+  const value = { 
+    session, user, loading, recoveryMode, 
+    profileOpen, setProfileOpen, 
+    resetPasswordOpen, setResetPasswordOpen 
+  }
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>
 }

@@ -8,6 +8,8 @@ export interface AuthContextType {
   recoveryMode: boolean;
   profileOpen: boolean;
   setProfileOpen: (open: boolean) => void;
+  resetPasswordOpen: boolean;
+  setResetPasswordOpen: (open: boolean) => void;
 }
 
 export const AuthContext = createContext<AuthContextType>({
@@ -17,6 +19,8 @@ export const AuthContext = createContext<AuthContextType>({
   recoveryMode: false,
   profileOpen: false,
   setProfileOpen: () => {},
+  resetPasswordOpen: false,
+  setResetPasswordOpen: () => {},
 });
 
 export const useAuth = () => {
