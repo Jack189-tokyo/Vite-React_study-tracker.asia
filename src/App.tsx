@@ -59,7 +59,7 @@ function App() {
       {!session ? (
         <AuthForm />
       ) : (
-        <div className="fixed inset-0 z-10 pt-4 px-4 overflow-y-auto overscroll-behavior-contain">
+        <div className="fixed inset-0 z-10 pt-4 px-4 overflow-y-auto">
           <div className="h-full flex justify-center">
             <div className="w-full max-w-[500px] flex flex-col">
               <Header onProfileClick={() => setProfileOpen(true)} />

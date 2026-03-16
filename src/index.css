@@ -30,7 +30,7 @@
 @layer components {
   .card {
     @apply bg-[color:#FFFFFFD9] backdrop-blur rounded-3xl p-5 shadow-xl border-2 border-[color:#7C3AED4D];
-    touch-action: none;
+    touch-action: pan-y;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
