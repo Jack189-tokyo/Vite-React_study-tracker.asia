@@ -53,31 +53,35 @@ function App() {
   const selectedISO = `${selectedDate.getFullYear()}-${String(selectedDate.getMonth() + 1).padStart(2, '0')}-${String(selectedDate.getDate()).padStart(2, '0')}`;
 
   return (
-    <div className="relative z-10 max-w-[500px] min-h-screen mx-auto p-4 box-border flex flex-col">
+    <>
       <DynamicBackground />
       
       {!session ? (
         <AuthForm />
       ) : (
-        <>
-          <Header onProfileClick={() => setProfileOpen(true)} />
-          <main className="flex flex-col gap-6 flex-grow overflow-visible">
-            <CalendarView selected={selectedDate} onDateSelect={setSelectedDate} />
-            <div className="flex flex-col gap-6">
-              <DailyView selected={selectedDate} />
-              <WrongBook selectedISO={selectedISO} onJumpDate={(iso) => {
-                const [y, m, d] = iso.split('-').map(n => parseInt(n, 10));
-                setSelectedDate(new Date(y, m - 1, d));
-              }} />
-              <HonorWall />
+        <div className="fixed inset-0 z-10 pt-4 px-4 overflow-y-auto overscroll-behavior-contain">
+          <div className="h-full flex justify-center">
+            <div className="w-full max-w-[500px] flex flex-col">
+              <Header onProfileClick={() => setProfileOpen(true)} />
+              <main className="flex flex-col gap-6 flex-grow">
+                <CalendarView selected={selectedDate} onDateSelect={setSelectedDate} />
+                <div className="flex flex-col gap-6">
+                  <DailyView selected={selectedDate} />
+                  <WrongBook selectedISO={selectedISO} onJumpDate={(iso) => {
+                    const [y, m, d] = iso.split('-').map(n => parseInt(n, 10));
+                    setSelectedDate(new Date(y, m - 1, d));
+                  }} />
+                  <HonorWall />
+                </div>
+              </main>
             </div>
-          </main>
-        </>
+          </div>
+        </div>
       )}
 
       <ProfileModal />
       <ResetPasswordModal />
-    </div>
+    </>
   );
 }
 
